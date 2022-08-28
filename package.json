@@ -7,13 +7,11 @@
   "scripts": {
     "start": "node server/index.js",
     "develop": "concurrently \"cd server && npm run watch\" \"cd client && npm start\"",
-    "test": "echo \"Error: no test specified\" && exit 1",
+    "test": "cd server && npm test",
     "build": "cd client && npm install && npm run build"
   },
-  "dependencies": {
-    "express-generator": "^4.16.1"
-  },
   "devDependencies": {
+    "@types/jest": "^28.1.8",
     "concurrently": "^7.3.0"
   },
   "keywords": [],

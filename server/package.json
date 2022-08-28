@@ -5,9 +5,10 @@
   "scripts": {
     "start": "node index.js",
     "watch": "nodemon",
-    "test": "jest --watchAll"
+    "test": "yarn jest"
   },
   "dependencies": {
+    "dotenv": "^16.0.1",
     "express": "~4.16.1",
     "node-fetch": "2.0"
   },

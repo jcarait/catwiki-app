@@ -1,4 +1,5 @@
 const request = require("supertest");
+
 const app = require("./index.js");
 
 describe("Cat API", () => {
@@ -8,13 +9,12 @@ describe("Cat API", () => {
       expect(body.message).toBe("Hello from CatWiki!");
     });
   });
-  describe("get cat breed route", () => {
-    describe("given the cat info does not exist", () => {
-      it("should return a 404", async () => {
-        let catId;
-
-        await request(app).get(`/api/breed/${catId}`);
-        expect(404);
+  describe("get cat breed names", () => {
+    describe("given the cat breed info exists", () => {
+      it("should return a 200 status and the breed names", async () => {
+        const { body, statusCode } = await request(app).get(`/api/breeds`);
+        expect(statusCode).toBe(200);
+        expect(body).toEqual(expect.arrayContaining([expect.any(String)]));
       });
     });
   });
