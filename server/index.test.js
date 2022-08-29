@@ -9,12 +9,12 @@ describe("Cat API", () => {
       expect(body.message).toBe("Hello from CatWiki!");
     });
   });
-  describe("get cat breed names", () => {
+  describe("get all cat breeds", () => {
     describe("given the cat breed info exists", () => {
-      it("should return a 200 status and the breed names", async () => {
+      it("should return a 200 status and an array of objects", async () => {
         const { body, statusCode } = await request(app).get(`/api/breeds`);
         expect(statusCode).toBe(200);
-        expect(body).toEqual(expect.arrayContaining([expect.any(String)]));
+        expect(body).toEqual(expect.arrayContaining([expect.any(Object)]));
       });
     });
   });

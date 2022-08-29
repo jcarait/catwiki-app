@@ -23,8 +23,7 @@ app.get("/api/breeds", async (req, res) => {
     },
   });
   const data = await response.json();
-  const names = data.map((value) => value.name);
-  res.json(names);
+  res.json(data);
 });
 
 app.listen(PORT, () => {
