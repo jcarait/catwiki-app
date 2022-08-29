@@ -1,13 +1,25 @@
+import { fireEvent, render, screen, act, within } from "@testing-library/react";
 import React from "react";
-import { render, screen, act } from "@testing-library/react";
-import LiveSearch from "../components/LiveSearch.js";
+import ComboBox from "../components/LiveSearch";
 
-global.fetch = jest.fn(() =>
-  Promise.resolve({
-    json: () => Promise.resolve({ breed: "bengal" }),
-  })
-);
+test("that autocomplete works", async () => {
+  render(<ComboBox />, {});
 
-describe("Live Search", () => {
-  it("loads an array of cat breed names on mount", () => {});
+  const liveSearch = screen.getByTestId("live-search");
+  const input = screen.getByRole("combobox");
+
+  act(() => {
+    liveSearch.click();
+    liveSearch.focus();
+
+    fireEvent.change(input, { target: { value: "aeg" } });
+  });
+
+  await act(async () => {
+    await new Promise((resolve) => setTimeout(resolve, 0));
+  });
+
+  fireEvent.click(screen.getAllByRole("option")[0]);
+
+  expect(input.value).toEqual("Aegean");
 });
