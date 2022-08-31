@@ -3,6 +3,7 @@ import { Box } from "@mui/system";
 import { Typography } from "@mui/material";
 import LiveSearch from "../components/LiveSearch";
 import cat from "../images/cat.jpg";
+import useFetch from "../utils/useFetch";
 
 const theme = createTheme({
   typography: {
@@ -16,6 +17,8 @@ const theme = createTheme({
 });
 
 export default function Home() {
+  const { data, error } = useFetch("http://localhost:3001/api/breeds");
+
   return (
     <ThemeProvider theme={theme}>
       <Container sx={{}}>
@@ -63,7 +66,7 @@ export default function Home() {
                 <h1>CatWiki</h1>
                 <p>Get to know more about your cat breed</p>
               </Typography>
-              <LiveSearch url="http://localhost:3001/api/breeds" />
+              <LiveSearch data={data} error={error} />
             </Box>
           </Grid>
           <Grid item xs={12} sm={6} md={6} sx={{ display: "flex" }}>
