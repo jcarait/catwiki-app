@@ -1,64 +1,107 @@
 /* eslint-disable testing-library/no-unnecessary-act */
-import { rest } from "msw";
-import { setupServer } from "msw/node";
-import {
-  fireEvent,
-  render,
-  screen,
-  act,
-  waitFor,
-  findByRole,
-} from "@testing-library/react";
+
+import { render, screen, act, waitFor } from "@testing-library/react";
+import { BrowserRouter } from "react-router-dom";
 import userEvent from "@testing-library/user-event";
-import React from "react";
 import LiveSearch from "../components/LiveSearch";
 
-const server = setupServer(
-  rest.get("/breeds", async (req, res, ctx) => {
-    return res(
-      ctx.status(200),
-      ctx.json([{ name: "bengal" }, { name: "aegean" }])
-    );
-  })
-);
+const mockUseNavigate = jest.fn();
+jest.mock("react-router-dom", () => ({
+  ...jest.requireActual("react-router-dom"),
+  useNavigate: () => mockUseNavigate,
+}));
 
-beforeAll(() => server.listen());
-afterEach(() => {
-  server.resetHandlers();
-});
-afterAll(() => server.close());
+const mockData = [
+  {
+    name: "bengal",
+  },
+];
 
 describe("LiveSearch component", () => {
-  it("loads and autocompletes when user searches for cat breed", async () => {
-    const user = userEvent.setup();
+  describe("given data is called from api", () => {
+    it("loads and autocompletes when user searches for cat breed", async () => {
+      const mockError = "";
+      const user = userEvent.setup();
 
-    render(<LiveSearch url="/breeds" />);
+      render(
+        <BrowserRouter>
+          <LiveSearch data={mockData} error={mockError} />
+        </BrowserRouter>
+      );
 
-    const liveSearch = screen.getByTestId("live-search");
-    const input = screen.getByRole("combobox");
+      const liveSearch = screen.getByTestId("live-search");
+      const input = screen.getByRole("combobox");
 
-    act(() => {
-      user.click(liveSearch);
+      act(() => {
+        user.click(liveSearch);
 
-      user.keyboard("beng");
+        user.keyboard("beng");
+      });
+
+      await waitFor(() => screen.findByRole("option"), { timeout: 4000 });
+      await user.click(screen.getAllByRole("option")[0]);
+
+      expect(input.value).toEqual("bengal");
     });
-
-    await waitFor(() => screen.findByRole("option"), { timeout: 4000 });
-    await user.click(screen.getAllByRole("option")[0]);
-
-    expect(input.value).toEqual("bengal");
   });
-  it("should handle server error", async () => {
-    server.use(
-      //override initial GET to return 500 server error
-      rest.get("/breeds", (req, res, ctx) => {
-        return res(ctx.status(500));
-      })
-    );
-    render(<LiveSearch url="/breeds" />);
-    const alert = await waitFor(() => screen.findByText(/Oops/i), {
-      timeout: 3000,
+  describe("given the api call returns an error", () => {
+    it("loads and autocompletes when user searches for cat breed", async () => {
+      const mockData = null;
+      const mockError = "404";
+
+      render(
+        <BrowserRouter>
+          <LiveSearch data={mockData} error={mockError} />
+        </BrowserRouter>
+      );
+
+      const alert = await screen.findByRole("alert");
+      expect(alert).toBeInTheDocument();
     });
-    expect(alert).toBeInTheDocument();
+  });
+  describe("a valid value is typed or selected from options and the enter key is pressed", () => {
+    it("checks if input value is valid and calls useNavigate function", async () => {
+      const user = userEvent.setup();
+
+      render(
+        <BrowserRouter>
+          <LiveSearch data={mockData} />
+        </BrowserRouter>
+      );
+
+      const liveSearch = screen.getByTestId("live-search");
+      const input = screen.getByRole("combobox");
+
+      await act(async () => {
+        liveSearch.focus();
+        user.click(liveSearch);
+        await user.type(liveSearch, "bengal{Enter}");
+      });
+
+      expect(input.value).toEqual("bengal");
+      expect(mockUseNavigate).toBeCalled();
+    });
+  });
+  describe("an invalid value is typed or selected from options and the enter key is pressed", () => {
+    it("should do nothing if enter is pressed", async () => {
+      const user = userEvent.setup();
+
+      render(
+        <BrowserRouter>
+          <LiveSearch data={mockData} />
+        </BrowserRouter>
+      );
+
+      const liveSearch = screen.getByTestId("live-search");
+      const input = screen.getByRole("combobox");
+
+      await act(async () => {
+        liveSearch.focus();
+        user.click(liveSearch);
+        await user.type(liveSearch, "beng{Enter}");
+      });
+
+      expect(input.value).toEqual("beng");
+    });
   });
 });
