@@ -1,11 +1,12 @@
-import { render, screen } from "@testing-library/react";
+import { render, screen, waitFor } from "@testing-library/react";
 import Image from "../components/Image";
 
 describe("Image component", () => {
-  test("Image must have src and alt attribute", () => {
+  test("Image must have src and alt attribute", async () => {
     render(<Image />);
-    const image = screen.getByRole("img");
-    expect(image).toHaveAttribute("src");
-    expect(image).toHaveAttribute("alt");
+    await waitFor(() => screen.findAllByRole("img"), { timeout: 4000 });
+
+    expect(screen.getAllByRole("img")[0]).toHaveAttribute("src");
+    expect(screen.getAllByRole("img")[0]).toHaveAttribute("alt");
   });
 });
