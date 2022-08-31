@@ -4,10 +4,10 @@ import CatProfile from "../routes/CatProfile";
 describe("Cat Profile Page", () => {
   describe("given a valid cat breed name", () => {
     it("should render name of cat requested from search", () => {
-      const name = { name: "Siamese" };
+      const name = "Siamese";
 
-      render(<CatProfile props={name} />);
-      const nameElement = screen.getByText(name.name);
+      render(<CatProfile name={name} />);
+      const nameElement = screen.getByText(name);
       expect(nameElement).toBeInTheDocument();
     });
   });

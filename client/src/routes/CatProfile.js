@@ -6,7 +6,7 @@ export default function CatProfile(props) {
   return (
     <Container>
       <Typography component={"div"} gutterBottom sx={{ color: "black" }}>
-        <h1>Bengal</h1>
+        <h1>{props.name}</h1>
       </Typography>
       <Image />
     </Container>
