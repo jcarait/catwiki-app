@@ -6,7 +6,7 @@ function App() {
   return (
     <div className="App">
       <h1>CatWiki</h1>
-      <LiveSearch />
+      <LiveSearch url="http://localhost:3001/api/breeds" />
     </div>
   );
 }
