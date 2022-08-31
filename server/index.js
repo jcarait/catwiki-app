@@ -27,6 +27,19 @@ app.get("/api/breeds", async (req, res) => {
   const data = await response.json();
   res.json(data);
 });
+app.get("/api/images/:id", async (req, res) => {
+  const response = await fetch(
+    `${url}/images/search?limit=8&breed_ids=${req.params.id}`,
+    {
+      headers: {
+        "Content-Type": "application/json",
+        "x-api-key": process.env.API_KEY,
+      },
+    }
+  );
+  const data = await response.json();
+  res.json(data);
+});
 
 app.listen(PORT, () => {
   console.log(`Server listening on ${PORT}`);

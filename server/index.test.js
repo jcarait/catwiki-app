@@ -18,11 +18,20 @@ describe("Cat API", () => {
     });
   });
   describe("get all images by cat breed id", () => {
-    describe("given the cat breed info exists", () => {
+    describe("given the cat breed images exists", () => {
       it("should return a 200 status and an array of objects", async () => {
-        const { body, statusCode } = await request(app).get(`/api/images`);
+        const params = "beng";
+
+        const { body, statusCode } = await request(app).get(
+          `/api/images/${params}`
+        );
+
+        const firstObj = body[0];
+
+        console.log(body);
         expect(statusCode).toBe(200);
         expect(body).toEqual(expect.arrayContaining([expect.any(Object)]));
+        expect(firstObj.url).toEqual(expect.any(String));
       });
     });
   });
