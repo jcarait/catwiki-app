@@ -33,8 +33,9 @@ function App() {
             justifyContent: "center ",
             bgcolor: "black",
             borderRadius: "25px",
-            marginTop: "20px",
-            height: "500px",
+            margin: "auto",
+            marginTop: "0.5rem",
+            height: "650px",
           }}
         >
           <Grid
@@ -45,11 +46,15 @@ function App() {
             sx={{
               display: "flex",
               alignContent: "center",
+              justifyContent: "center",
             }}
           >
             <Box
               sx={{
-                marginLeft: { xs: "1em" },
+                display: "flex",
+
+                flexDirection: "column",
+                justifyContent: "center",
                 padding: "1rem",
                 borderRadius: "5px",
               }}
@@ -70,7 +75,6 @@ function App() {
               component="img"
               sx={{
                 width: { xs: 200, sm: 250, md: 350 },
-                marginLeft: "auto",
               }}
               alt="cat"
               src={cat}
