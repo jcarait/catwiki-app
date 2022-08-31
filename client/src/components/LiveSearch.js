@@ -28,7 +28,7 @@ export default function LiveSearch({ url }) {
         id="live-search"
         data-testid="live-search"
         options={data?.map((breed) => breed.name)}
-        sx={{ width: 300 }}
+        sx={{ width: 300, bgcolor: "white", borderRadius: "8px" }}
         renderInput={(params) => (
           <TextField {...params} label="Search for cat by breed name" />
         )}
