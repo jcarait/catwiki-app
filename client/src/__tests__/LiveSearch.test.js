@@ -1,13 +1,7 @@
 /* eslint-disable testing-library/no-unnecessary-act */
 import { rest } from "msw";
 import { setupServer } from "msw/node";
-import {
-  fireEvent,
-  render,
-  screen,
-  act,
-  waitFor,
-} from "@testing-library/react";
+import { render, screen, act, waitFor } from "@testing-library/react";
 import userEvent from "@testing-library/user-event";
 import React from "react";
 import LiveSearch from "../components/LiveSearch";
@@ -28,6 +22,19 @@ afterEach(() => {
 afterAll(() => server.close());
 
 describe("LiveSearch component", () => {
+  it("should handle server error", async () => {
+    server.use(
+      //override initial GET to return 500 server error
+      rest.get("/breeds", (req, res, ctx) => {
+        return res(ctx.status(500));
+      })
+    );
+    render(<LiveSearch url="/breeds" />);
+    const alert = await waitFor(() => screen.findByText(/Oops/i), {
+      timeout: 3000,
+    });
+    expect(alert).toBeInTheDocument();
+  });
   it("loads and autocompletes when user searches for cat breed", async () => {
     const user = userEvent.setup();
 
@@ -46,18 +53,5 @@ describe("LiveSearch component", () => {
     await user.click(screen.getAllByRole("option")[0]);
 
     expect(input.value).toEqual("bengal");
-  });
-  it("should handle server error", async () => {
-    server.use(
-      //override initial GET to return 500 server error
-      rest.get("/breeds", (req, res, ctx) => {
-        return res(ctx.status(500));
-      })
-    );
-    render(<LiveSearch url="/breeds" />);
-    const alert = await waitFor(() => screen.findByText(/Oops/i), {
-      timeout: 3000,
-    });
-    expect(alert).toBeInTheDocument();
   });
 });
