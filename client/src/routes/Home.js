@@ -5,6 +5,8 @@ import LiveSearch from "../components/LiveSearch";
 import cat from "../images/cat.jpg";
 import useFetch from "../utils/useFetch";
 
+const BASE_URL = "http://localhost:3001";
+
 const theme = createTheme({
   typography: {
     h1: {
@@ -17,7 +19,7 @@ const theme = createTheme({
 });
 
 export default function Home() {
-  const { data, error } = useFetch("http://localhost:3001/api/breeds");
+  const { data, error } = useFetch(`${BASE_URL}/api/breeds`);
 
   return (
     <ThemeProvider theme={theme}>
