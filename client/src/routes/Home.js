@@ -19,7 +19,7 @@ const theme = createTheme({
 });
 
 export default function Home() {
-  const { data, error } = useFetch(`${BASE_URL}/api/breeds`);
+  const { data, error } = useFetch(`/api/breeds`);
 
   return (
     <ThemeProvider theme={theme}>

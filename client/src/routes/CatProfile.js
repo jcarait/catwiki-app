@@ -9,9 +9,7 @@ const BASE_URL = "http://localhost:3001";
 export default function CatProfile() {
   const location = useLocation();
 
-  const { data, error } = useFetch(
-    `${BASE_URL}/api/images/${location.state.id}`
-  );
+  const { data, error } = useFetch(`/api/images/${location.state.id}`);
 
   return (
     <Container>
