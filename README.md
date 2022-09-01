@@ -45,10 +45,10 @@ The application was built with a focus on clean coding, code hygeine and Test Dr
 
 ---
 
-This project was built with Yarn, you can install the dependencies using
+This project was built with Yarn, you can install the dependencies from the _root_ folder with
 
 ```
-yarn install
+cd server && yarn install && cd ../client && yarn install
 ```
 
 Alternatively, delete the **yarn.lock** files in the root, /client and /server folder and use
