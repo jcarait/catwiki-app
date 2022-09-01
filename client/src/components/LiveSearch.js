@@ -18,7 +18,8 @@ export default function LiveSearch({ data, error }) {
   const [inputValue, setInputValue] = useState("");
 
   const handleAutoCompleteChange = (e, value) => {
-    setInputValue(value);
+    const valueToText = value.toString();
+    setInputValue(valueToText);
   };
 
   const handleTextFieldChange = (e) => {
@@ -39,7 +40,7 @@ export default function LiveSearch({ data, error }) {
             {...params}
             label="Search by breed"
             variant="filled"
-            onKeyDown={(e) => searchHandler(data, navigate, e)}
+            onKeyDown={(e) => searchHandler(data, navigate, e, inputValue)}
             onChange={handleTextFieldChange}
           />
         )}
@@ -48,7 +49,7 @@ export default function LiveSearch({ data, error }) {
         sx={{ marginTop: "1em" }}
         variant="outlined"
         color="secondary"
-        onClick={() => searchHandler(data, navigate, ...[], inputValue)}
+        onClick={(e) => searchHandler(data, navigate, e, inputValue)}
         data-testid="button"
       >
         Search
