@@ -104,4 +104,23 @@ describe("LiveSearch component", () => {
       expect(input.value).toEqual("beng");
     });
   });
+  describe("a button that can be clicked to search", () => {
+    it("should render on the page", () => {
+      render(<LiveSearch />);
+      expect(screen.getByTestId("button")).toBeInTheDocument();
+    });
+    describe("when the button is clicked", () => {
+      it("should execute the search function and call the navigate function", () => {
+        const user = userEvent.setup();
+
+        render(
+          <BrowserRouter>
+            <LiveSearch data={mockData} />
+          </BrowserRouter>
+        );
+
+        const button = screen.getByTestId("button");
+      });
+    });
+  });
 });
