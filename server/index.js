@@ -1,4 +1,4 @@
-require("dotenv");
+require("dotenv").config();
 const path = require("path");
 const express = require("express");
 const fetch = require("node-fetch");
@@ -27,7 +27,7 @@ app.get("/api/breeds", async (req, res) => {
 });
 app.get("/api/images/:id", async (req, res) => {
   const response = await fetch(
-    `${url}/images/search?limit=8&breed_ids=${req.params.id}`,
+    `${url}/images/search?limit=12&breed_ids=${req.params.id}`,
     {
       headers: {
         "Content-Type": "application/json",

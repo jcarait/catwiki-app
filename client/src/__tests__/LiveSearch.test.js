@@ -111,7 +111,7 @@ describe("LiveSearch component", () => {
       expect(screen.getByTestId("button")).toBeInTheDocument();
     });
     describe("when the button is clicked", () => {
-      it("should execute the search function and call the navigate function", () => {
+      it("should execute the search function and call the navigate function", async () => {
         const user = userEvent.setup();
 
         render(
@@ -121,6 +121,16 @@ describe("LiveSearch component", () => {
         );
 
         const button = screen.getByTestId("button");
+        const liveSearch = screen.getByTestId("live-search");
+
+        await act(async () => {
+          liveSearch.focus();
+          user.click(liveSearch);
+          await user.type(liveSearch, "bengal");
+          await user.click(button);
+        });
+
+        expect(mockUseNavigate).toBeCalled();
       });
     });
   });

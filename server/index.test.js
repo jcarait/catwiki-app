@@ -28,7 +28,6 @@ describe("Cat API", () => {
 
         const firstObj = body[0];
 
-        console.log(body);
         expect(statusCode).toBe(200);
         expect(body).toEqual(expect.arrayContaining([expect.any(Object)]));
         expect(firstObj.url).toEqual(expect.any(String));

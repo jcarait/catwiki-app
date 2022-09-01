@@ -1,6 +1,6 @@
 import { Container } from "@mui/system";
-import { Typography } from "@mui/material";
-import { useLocation } from "react-router-dom";
+import { Box, Button, Typography } from "@mui/material";
+import { Link, useLocation } from "react-router-dom";
 import Image from "../components/Image";
 import useFetch from "../utils/useFetch";
 
@@ -12,7 +12,14 @@ export default function CatProfile() {
   return (
     <Container>
       <Typography component={"div"} gutterBottom sx={{ color: "black" }}>
-        <h1 data-testid="test-title">{location.state.name}</h1>
+        <Box sx={{ display: "flex", alignItems: "center" }}>
+          <h1 data-testid="test-title">{location.state.name}</h1>
+          <Box sx={{ marginLeft: "auto" }}>
+            <Link to="/">
+              <Button variant="outlined">Search for another cat</Button>
+            </Link>
+          </Box>
+        </Box>
       </Typography>
       <Image images={data} error={error} />
     </Container>
