@@ -50,5 +50,6 @@
       "src/**/*.{js,jsx}",
       "!src/index.js"
     ]
-  }
+  },
+  "proxy":"http://localhost:3001"
 }
