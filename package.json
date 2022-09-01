@@ -6,17 +6,12 @@
   "license": "MIT",
   "scripts": {
     "start": "node server/index.js",
-    "develop": "concurrently \"cd server && npm run watch\" \"cd client && npm start\"",
-    "test": "echo \"Error: no test specified\" && exit 1",
-    "build": "cd client && yarn install && npm run build",
-    "install": "cd server && yarn install && cd ../client && yarn install"
+    "test": "cd server && npm test && cd ../client && npm test",
+    "build": "cd client && npm install && npm run build",
+    "install": "cd server && npm install && cd ../client && npm install"
   },
-  "dependencies": {
-    "express-generator": "^4.16.1"
-  },
-  "devDependencies": {
-    "concurrently": "^7.3.0"
-  },
+  "dependencies": {},
+  "devDependencies": {},
   "keywords": [],
   "description": ""
 }

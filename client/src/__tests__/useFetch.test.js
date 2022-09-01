@@ -38,7 +38,7 @@ describe("useFetch hook", () => {
   it("should return and render data on success", async () => {
     jest.spyOn(global, "fetch");
 
-    act(() => render(<TestComponent url="/breeds" />));
+    render(<TestComponent url="/breeds" />);
 
     const data = await screen.findByTestId("bengal");
     expect(data).toBeInTheDocument();

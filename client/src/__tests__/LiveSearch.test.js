@@ -75,7 +75,7 @@ describe("LiveSearch component", () => {
 
       await act(async () => {
         liveSearch.focus();
-        user.click(liveSearch);
+        await user.click(liveSearch);
         await user.type(liveSearch, "bengal{Enter}");
       });
 
@@ -98,7 +98,7 @@ describe("LiveSearch component", () => {
 
       await act(async () => {
         liveSearch.focus();
-        user.click(liveSearch);
+        await user.click(liveSearch);
         await user.type(liveSearch, "beng{Enter}");
       });
 
@@ -125,7 +125,7 @@ describe("LiveSearch component", () => {
 
         await act(async () => {
           liveSearch.focus();
-          user.click(liveSearch);
+          await user.click(liveSearch);
           await user.type(liveSearch, "bengal");
           await user.click(button);
         });

@@ -5,3 +5,4 @@
 import "@testing-library/jest-dom";
 import "@testing-library/react";
 import "@testing-library/user-event";
+global.IS_REACT_ACT_ENVIRONMENT = true;

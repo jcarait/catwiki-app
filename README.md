@@ -4,9 +4,13 @@ A collection of information all about cats, built as a full stack application wi
 
 ## Demo
 
-Live Demo:
+---
+
+Live Demo: [Link](https://catwiki-challenge.herokuapp.com/)
 
 ## Development
+
+---
 
 ### Motivation
 
@@ -18,11 +22,19 @@ The application was built with a focus on clean coding, code hygeine and Test Dr
 
 ## Site
 
+---
+
 ### Home Page
+
+![a web page with title, search bar and cat](/home-page.jpg)
 
 ### Cat Profile Page
 
+![a web page with results of multiple images of cats](/cat-profile-page.jpg)
+
 ## Built With
+
+---
 
 - [ReactJS](https://reactjs.org/) - React is a free and open-source front-end JavaScript library for building user interfaces based on UI components.
 - [Material UI](https://mui.com/) - MUI offers a comprehensive suite of UI tools to help you ship new features faster.
@@ -31,16 +43,34 @@ The application was built with a focus on clean coding, code hygeine and Test Dr
 
 ## Usage
 
+---
+
 This project was built with Yarn, you can install the dependencies using
 
 ```
 yarn install
 ```
 
-Alternatively, delete the yarn.lock file and use
+Alternatively, delete the **yarn.lock** files in the root, /client and /server folder and use
 
 ```
 npm install
 ```
 
 ## Tests
+
+---
+
+Before running tests, close the server if it is running.
+
+Then from the root folder, run
+
+```
+npm test
+```
+
+or
+
+```
+yarn test
+```
