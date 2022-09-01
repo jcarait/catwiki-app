@@ -4,8 +4,6 @@ import { useLocation } from "react-router-dom";
 import Image from "../components/Image";
 import useFetch from "../utils/useFetch";
 
-const BASE_URL = "http://localhost:3001";
-
 export default function CatProfile() {
   const location = useLocation();
 

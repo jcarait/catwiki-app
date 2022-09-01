@@ -13,6 +13,7 @@ jest.mock("react-router-dom", () => ({
 
 const mockData = [
   {
+    id: 1,
     name: "bengal",
   },
 ];

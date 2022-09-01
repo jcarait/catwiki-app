@@ -1,11 +1,15 @@
-import * as React from "react";
+import { useMediaQuery, createTheme } from "@mui/material";
 import ImageList from "@mui/material/ImageList";
 import ImageListItem from "@mui/material/ImageListItem";
 
 export default function Image({ images, error }) {
+  const theme = createTheme();
+
+  const matchDownMd = useMediaQuery(theme.breakpoints.down("sm"));
+
   return (
     // Added condition to return empty array if false as it crashes if props are undefined or null
-    <ImageList sx={{}} cols={4} gap={10}>
+    <ImageList sx={{}} cols={matchDownMd ? 1 : 3} gap={10}>
       {images
         ? images.map((item) => (
             <ImageListItem key={item.id}>

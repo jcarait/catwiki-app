@@ -4,8 +4,7 @@ import { Typography } from "@mui/material";
 import LiveSearch from "../components/LiveSearch";
 import cat from "../images/cat.jpg";
 import useFetch from "../utils/useFetch";
-
-const BASE_URL = "http://localhost:3001";
+import { grey } from "@mui/material/colors";
 
 const theme = createTheme({
   typography: {
@@ -15,6 +14,9 @@ const theme = createTheme({
     h2: {
       fontSize: "12px",
     },
+  },
+  palette: {
+    secondary: grey,
   },
 });
 
