@@ -5,7 +5,7 @@
   "author": "Jonathan Florido-Carait <jonathan.carait@outlook.com>",
   "license": "MIT",
   "scripts": {
-    "start": "node server/index.js",
+    "start": "node server/index.j",
     "test": "cd server && npm test && cd ../client && npm test",
     "build": "cd client && yarn install && yarn build",
     "install": "cd server && yarn install && cd ../client && yarn install"
