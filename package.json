@@ -7,7 +7,7 @@
   "scripts": {
     "start": "node server/index.js",
     "test": "cd server && npm test && cd ../client && npm test",
-    "build": "cd client && yarn install && yarn rbuild",
+    "build": "cd client && yarn install && yarn build",
     "install": "cd server && npm install && cd ../client && npm install"
   },
   "dependencies": {},
