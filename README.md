@@ -48,13 +48,13 @@ The application was built with a focus on clean coding, code hygeine and Test Dr
 This project was built with Yarn, you can install the dependencies from the _root_ folder with
 
 ```
-cd server && yarn install && cd ../client && yarn install
+yarn install
 ```
 
-Alternatively, delete the **yarn.lock** files in the root, /client and /server folder and use
+Alternatively, _delete the **yarn.lock**_ files in the root, /client and /server folder and use
 
 ```
-npm install
+cd server && npm install && cd ../client && npm install
 ```
 
 ## Tests
